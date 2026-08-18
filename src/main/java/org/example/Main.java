@@ -183,4 +183,43 @@ public class Main {
             System.out.println(l);
         }
     }
+
+    // ================== UPDATE (Libro) ==================
+    public static void actualizarLibro() {
+        System.out.println("=== Actualizar libro ===");
+
+        System.out.print("Ingrese el código del libro a actualizar: ");
+        String codigo = sc.nextLine();
+
+        Libro l = buscarLibro(codigo);
+
+        if (l == null) {
+            System.out.println("Libro no encontrado.");
+            return;
+        }
+
+        System.out.println("Libro actual: " + l);
+        System.out.println("Deje el campo vacío si no desea modificarlo.");
+
+        System.out.print("Nuevo título (" + l.getTitulo() + "): ");
+        String titulo = sc.nextLine();
+        if (!titulo.isBlank()) {
+            l.setTitulo(titulo);
+        }
+
+        System.out.print("Nuevo año de publicación (" + l.getAnioPublic() + "): ");
+        String anioPublic = sc.nextLine();
+        if (!anioPublic.isBlank()) {
+            l.setAnioPublic(anioPublic);
+        }
+
+        System.out.print("Nuevo autor (" + l.getAutor() + "): ");
+        String autor = sc.nextLine();
+        if (!autor.isBlank()) {
+            l.setAutor(autor);
+        }
+
+        System.out.println("Libro actualizado con éxito.");
+        System.out.println("Libro actualizado: " + l);
+    }
 }
