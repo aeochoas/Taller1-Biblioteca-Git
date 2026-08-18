@@ -127,4 +127,22 @@ public class Main {
         }
     }
 
+
+    public static void crearLibro() {
+        System.out.println("=== Registrar nuevo libro ===");
+        System.out.print("Código: ");
+        String codigo = sc.nextLine();
+        System.out.print("Título: ");
+        String titulo = sc.nextLine();
+        System.out.print("Año de publicación: ");
+        String anioPublic = sc.nextLine();
+        System.out.print("Autor: ");
+        String autor = sc.nextLine();
+        boolean disponible = true;
+
+        Libro nuevo = new Libro(codigo, titulo, anioPublic, autor, disponible);
+        libros.add(nuevo);
+
+        System.out.println("Libro registrado con éxito.");
+    }
 }
