@@ -50,4 +50,18 @@ public class Main {
         }
         return null;
     }
+
+    public static void buscarCliente() {
+        System.out.println("=== Buscar cliente ===");
+        System.out.print("Ingrese el ID del cliente a buscar: ");
+        String id = sc.nextLine();
+        Cliente c = buscarClientePorId(id);
+
+        if (c == null) {
+            System.out.println("Cliente no encontrado.");
+        } else {
+            System.out.print("Cliente encontrado:");
+            System.out.println(c);
+        }
+    }
 }
