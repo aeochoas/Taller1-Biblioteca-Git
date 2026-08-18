@@ -12,21 +12,42 @@ public class Main {
         //menu
     }
     public static void crearCliente(){
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         String id=sc.nextLine();
 
-        System.out.println("Nombre: ");
+        System.out.print("Nombre: ");
         String nombre=sc.nextLine();
 
-        System.out.println("Telefono: ");
+        System.out.print("Telefono: ");
         String telefono=sc.nextLine();
 
-        System.out.println("Email: ");
+        System.out.print("Email: ");
         String email = sc.nextLine();
 
         Cliente nuevo=new Cliente(id, nombre, telefono, email);
         clientes.add(nuevo);
 
-        System.out.println("Cliente registrado con exito.");
+        System.out.print("Cliente registrado con exito.");
+    }
+
+    public static void listarClientes() {
+        System.out.print("=== Lista de clientes ===");
+
+        if (clientes.isEmpty()) {
+            System.out.print("No hay clientes registrados.");
+            return;
+        }
+        for (Cliente c : clientes) {
+            System.out.println(c);
+        }
+    }
+
+    public static Cliente buscarClientePorId(String id) {
+        for (Cliente c : clientes) {
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        return null;
     }
 }
