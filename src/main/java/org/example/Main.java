@@ -1,17 +1,128 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import java.util.ArrayList;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+
+public class Main {
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static Scanner sc= new Scanner(System.in);
+
+    public static void main(String [] args){
+        //menu
+    }
+    public static void crearCliente(){
+        System.out.print("ID: ");
+        String id=sc.nextLine();
+
+        System.out.print("Nombre: ");
+        String nombre=sc.nextLine();
+
+        System.out.print("Telefono: ");
+        String telefono=sc.nextLine();
+
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+
+        Cliente nuevo=new Cliente(id, nombre, telefono, email);
+        clientes.add(nuevo);
+
+        System.out.print("Cliente registrado con exito.");
+    }
+
+    public static void listarClientes() {
+        System.out.print("=== Lista de clientes ===");
+
+        if (clientes.isEmpty()) {
+            System.out.print("No hay clientes registrados.");
+            return;
+        }
+        for (Cliente c : clientes) {
+            System.out.println(c);
         }
     }
+
+    public static Cliente buscarClientePorId(String id) {
+        for (Cliente c : clientes) {
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static void buscarCliente() {
+        System.out.println("=== Buscar cliente ===");
+        System.out.print("Ingrese el ID del cliente a buscar: ");
+        String id = sc.nextLine();
+        Cliente c = buscarClientePorId(id);
+
+        if (c == null) {
+            System.out.println("Cliente no encontrado.");
+        } else {
+            System.out.print("Cliente encontrado:");
+            System.out.println(c);
+        }
+    }
+
+
+
+    public static void actualizarCliente() {
+        System.out.println("=== Actualizar cliente ===");
+        System.out.print("Ingrese el ID del cliente a actualizar: ");
+        String id = sc.nextLine();
+        Cliente c = buscarClientePorId(id);
+
+        if (c == null) {
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+
+        System.out.println("Cliente actual: " + c);
+        System.out.println("Deje el campo vacío si no desea modificarlo.");
+        System.out.print("Nuevo nombre (" + c.getNombre() + "): ");
+        String nombre = sc.nextLine();
+        if (!nombre.isBlank()) {
+            c.setNombre(nombre);
+        }
+
+        System.out.print("Nuevo teléfono (" + c.getTelefono() + "): ");
+        String telefono = sc.nextLine();
+        if (!telefono.isBlank()) {
+            c.setTelefono(telefono);
+        }
+
+        System.out.print("Nuevo email (" + c.getEmail() + "): ");
+        String email = sc.nextLine();
+        if (!email.isBlank()) {
+            c.setEmail(email);
+        }
+
+        System.out.println("Cliente actualizado con éxito.");
+        System.out.println("Cliente actualizado: " + c);
+    }
+
+
+    public static void eliminarCliente() {
+        System.out.println("=== Eliminar cliente ===");
+        System.out.print("Ingrese el ID del cliente a eliminar: ");
+        String id = sc.nextLine();
+        Cliente c = buscarClientePorId(id);
+
+        if (c == null) {
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+        System.out.println("Cliente encontrado: " + c);
+        System.out.print("¿Está seguro de que desea eliminarlo? (S/N): ");
+        String confirmacion = sc.nextLine();
+
+        if (confirmacion.equalsIgnoreCase("S")) {
+            clientes.remove(c);
+            System.out.println("Cliente eliminado con éxito.");
+        } else {
+            System.out.println("Operación cancelada.");
+        }
+    }
+
 }
