@@ -32,7 +32,7 @@ public class Material {
     public void setAnioPublic(String anioPublic) {
         this.anioPublic = anioPublic;
     }
-    
+
     @Override
     public String toString() {
         return "Código: " + codigo + " | Título: " + titulo + " | Año: " + anioPublic;
