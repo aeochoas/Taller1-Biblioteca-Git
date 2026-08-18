@@ -147,7 +147,7 @@ public class Main {
     }
 
 
-    
+
     public static void listarLibros() {
         System.out.println("=== Lista de libros ===");
         if (libros.isEmpty()) {
@@ -155,6 +155,31 @@ public class Main {
             return;
         }
         for (Libro l : libros) {
+            System.out.println(l);
+        }
+    }
+
+    public static Libro buscarLibro(String codigo) {
+        for (Libro l : libros) {
+            if (l.getCodigo().equals(codigo)) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    public static void buscarLibroInteractivo() {
+        System.out.println("=== Buscar libro ===");
+
+        System.out.print("Ingrese el código del libro a buscar: ");
+        String codigo = sc.nextLine();
+
+        Libro l = buscarLibro(codigo);
+
+        if (l == null) {
+            System.out.println("Libro no encontrado.");
+        } else {
+            System.out.println("Libro encontrado:");
             System.out.println(l);
         }
     }
