@@ -2,11 +2,14 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 
 public class Main {
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static ArrayList<Libro> libros = new ArrayList<>();
+    static ArrayList<Prestamo> prestamos = new ArrayList<>();
+
     static Scanner sc= new Scanner(System.in);
 
 
@@ -249,6 +252,106 @@ public class Main {
             System.out.println("Libro eliminado con éxito.");
         } else {
             System.out.println("Operación cancelada.");
+        }
+    }
+
+    // ================== CREATE (Prestamo) ==================
+    public static void crearPrestamo() {
+        System.out.println("=== Registrar nuevo préstamo ===");
+
+        System.out.print("ID del cliente: ");
+        String idCliente = sc.nextLine();
+
+        Cliente cliente = buscarClientePorId(idCliente);
+
+        if (cliente == null) {
+            System.out.println("Cliente no encontrado. No se puede registrar el préstamo.");
+            return;
+        }
+
+        System.out.print("Código del libro: ");
+        String codigoLibro = sc.nextLine();
+
+        Libro libro = buscarLibro(codigoLibro);
+
+        if (libro == null) {
+            System.out.println("Libro no encontrado. No se puede registrar el préstamo.");
+            return;
+        }
+
+        if (!libro.isDisponible()) {
+            System.out.println("El libro '" + libro.getTitulo() + "' no está disponible actualmente.");
+            return;
+        }
+
+        System.out.print("ID del préstamo: ");
+        String idPrestamo = sc.nextLine();
+
+        // La fecha se toma automáticamente del sistema
+        LocalDate fecha = LocalDate.now();
+
+        String estado = "Activo";
+
+        Prestamo nuevo = new Prestamo(idPrestamo, cliente, libro, fecha, estado);
+        prestamos.add(nuevo);
+
+        // Al prestar el libro, ya no está disponible
+        libro.setDisponible(false);
+
+        System.out.println("Préstamo registrado con éxito.");
+        System.out.println(nuevo);
+    }
+
+
+
+
+    public static void devolverLibro() {
+        System.out.println("=== Registrar devolución ===");
+
+        System.out.print("ID del préstamo: ");
+        String idPrestamo = sc.nextLine();
+
+        Prestamo prestamo = buscarPrestamoPorId(idPrestamo);
+
+        if (prestamo == null) {
+            System.out.println("Préstamo no encontrado.");
+            return;
+        }
+
+        if (prestamo.getEstado().equalsIgnoreCase("Devuelto")) {
+            System.out.println("Este préstamo ya fue devuelto anteriormente.");
+            return;
+        }
+
+        prestamo.setEstado("Devuelto");
+
+        prestamo.getLibro().setDisponible(true);
+
+        System.out.println("Devolución registrada con éxito.");
+        System.out.println(prestamo);
+    }
+
+    public static Prestamo buscarPrestamoPorId(String idPrestamo) {
+        for (Prestamo p : prestamos) {
+            if (p.getIdPrestamo().equals(idPrestamo)) {
+                return p;
+            }
+        }
+        return null; // No encontrado
+    }
+
+
+    // ================== READ (listar prestamos) ==================
+    public static void listarPrestamos() {
+        System.out.println("=== Lista de préstamos ===");
+
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+            return;
+        }
+
+        for (Prestamo p : prestamos) {
+            System.out.println(p);
         }
     }
 }
