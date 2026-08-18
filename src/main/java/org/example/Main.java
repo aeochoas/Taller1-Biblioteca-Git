@@ -102,4 +102,27 @@ public class Main {
         System.out.println("Cliente actualizado: " + c);
     }
 
+
+    public static void eliminarCliente() {
+        System.out.println("=== Eliminar cliente ===");
+        System.out.print("Ingrese el ID del cliente a eliminar: ");
+        String id = sc.nextLine();
+        Cliente c = buscarClientePorId(id);
+
+        if (c == null) {
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+        System.out.println("Cliente encontrado: " + c);
+        System.out.print("¿Está seguro de que desea eliminarlo? (S/N): ");
+        String confirmacion = sc.nextLine();
+
+        if (confirmacion.equalsIgnoreCase("S")) {
+            clientes.remove(c);
+            System.out.println("Cliente eliminado con éxito.");
+        } else {
+            System.out.println("Operación cancelada.");
+        }
+    }
+
 }
