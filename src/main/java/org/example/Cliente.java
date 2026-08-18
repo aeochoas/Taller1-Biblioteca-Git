@@ -2,7 +2,7 @@ package org.example;
 
 public class Cliente extends Persona{
     private String email;
-    
+
     public Cliente(String id, String nombre, String telefono, String email){
         super(id, nombre, telefono);
         this.email=email;
