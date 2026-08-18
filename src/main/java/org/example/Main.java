@@ -184,7 +184,8 @@ public class Main {
         }
     }
 
-    // ================== UPDATE (Libro) ==================
+
+
     public static void actualizarLibro() {
         System.out.println("=== Actualizar libro ===");
 
@@ -221,5 +222,33 @@ public class Main {
 
         System.out.println("Libro actualizado con éxito.");
         System.out.println("Libro actualizado: " + l);
+    }
+
+
+
+
+    public static void eliminarLibro() {
+        System.out.println("=== Eliminar libro ===");
+
+        System.out.print("Ingrese el código del libro a eliminar: ");
+        String codigo = sc.nextLine();
+
+        Libro l = buscarLibro(codigo);
+
+        if (l == null) {
+            System.out.println("Libro no encontrado.");
+            return;
+        }
+
+        System.out.println("Libro encontrado: " + l);
+        System.out.print("¿Está seguro de que desea eliminarlo? (S/N): ");
+        String confirmacion = sc.nextLine();
+
+        if (confirmacion.equalsIgnoreCase("S")) {
+            libros.remove(l);
+            System.out.println("Libro eliminado con éxito.");
+        } else {
+            System.out.println("Operación cancelada.");
+        }
     }
 }
