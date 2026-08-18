@@ -54,4 +54,6 @@ public class Prestamo {
                 + " | Fecha: " + fecha
                 + " | Estado: " + estado;
     }
+
+
 }
