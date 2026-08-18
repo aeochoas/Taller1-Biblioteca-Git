@@ -339,4 +339,19 @@ public class Main {
         }
         return null; // No encontrado
     }
+
+
+    // ================== READ (listar prestamos) ==================
+    public static void listarPrestamos() {
+        System.out.println("=== Lista de préstamos ===");
+
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+            return;
+        }
+
+        for (Prestamo p : prestamos) {
+            System.out.println(p);
+        }
+    }
 }
