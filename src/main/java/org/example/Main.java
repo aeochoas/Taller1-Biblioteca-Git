@@ -14,8 +14,57 @@ public class Main {
 
 
     public static void main(String [] args){
-        //menu
-    }
+        int opcion;
+
+        do {
+            System.out.println("\n========= SISTEMA DE BIBLIOTECA =========");
+            System.out.println("--- Clientes ---");
+            System.out.println("1. Registrar cliente");
+            System.out.println("2. Listar clientes");
+            System.out.println("3. Buscar cliente");
+            System.out.println("4. Actualizar cliente");
+            System.out.println("5. Eliminar cliente");
+            System.out.println("--- Libros ---");
+            System.out.println("6. Registrar libro");
+            System.out.println("7. Listar libros");
+            System.out.println("8. Buscar libro");
+            System.out.println("9. Actualizar libro");
+            System.out.println("10. Eliminar libro");
+            System.out.println("--- Prestamos ---");
+            System.out.println("11. Registrar prestamo");
+            System.out.println("12. Devolver libro");
+            System.out.println("13. Listar prestamos");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            // Validación de entrada numérica
+            while (!sc.hasNextInt()) {
+                System.out.print("Ingrese un número válido: ");
+                sc.next();
+            }
+            opcion = sc.nextInt();
+            sc.nextLine(); // limpiar el salto de línea pendiente
+
+            switch (opcion) {
+                case 1 -> crearCliente();
+                case 2 -> listarClientes();
+                case 3 -> buscarCliente();
+                case 4 -> actualizarCliente();
+                case 5 -> eliminarCliente();
+                case 6 -> crearLibro();
+                case 7 -> listarLibros();
+                case 8 -> buscarLibroInteractivo();
+                case 9 -> actualizarLibro();
+                case 10 -> eliminarLibro();
+                case 11 -> crearPrestamo();
+                case 12 -> devolverLibro();
+                case 13 -> listarPrestamos();
+                case 0 -> System.out.println("Saliendo del sistema...");
+                default -> System.out.println("Opción inválida. Intente de nuevo.");
+            }
+
+        } while (opcion != 0);
+        }
     public static void crearCliente(){
         System.out.print("ID: ");
         String id=sc.nextLine();
